@@ -1,5 +1,5 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Tue Mar 12 01:59:09 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Tue Mar 12 02:09:11 2019",
     "version": "eosio::abi/1.1",
     "structs": [
         {
@@ -26,11 +26,11 @@
             "fields": [
                 {
                     "name": "capsule_seq",
-                    "type": "uint64"
+                    "type": "uint32"
                 },
                 {
                     "name": "user_seq",
-                    "type": "uint64"
+                    "type": "uint32"
                 },
                 {
                     "name": "encrypt_data",

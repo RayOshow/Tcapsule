@@ -1,8 +1,8 @@
 #pragma once
 
 struct [[eosio::table, eosio::contract(CONTRACT_NAME)]] capsule {
-	uint64_t capsule_seq;
-	uint64_t user_seq;
+	uint32_t capsule_seq;
+	uint32_t user_seq;
 	string encrypt_data;  
 	uint32_t last_refresh_time;
 	uint32_t refresh_period;	
