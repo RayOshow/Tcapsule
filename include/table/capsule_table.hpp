@@ -1,8 +1,8 @@
 #pragma once
 
 struct [[eosio::table, eosio::contract(CONTRACT_NAME)]] capsule {
-	uint32_t capsule_seq;
-	uint32_t user_seq;
+	uint64_t capsule_seq;
+	uint64_t user_seq;
 	string encrypt_data;  
 	uint32_t last_refresh_time;
 	uint32_t refresh_period;	
@@ -24,5 +24,4 @@ struct [[eosio::table, eosio::contract(CONTRACT_NAME)]] capsule {
 	)    
 };
 
-typedef eosio::multi_index< "capsule"_n, capsule ,indexed_by<"byuser"_n, const_mem_fun<capsule, uint64_t, &capsule::get_secondary_1>> > capsules;
-//typedef eosio::multi_index< "capsule"_n, capsule > capsules;
+typedef eosio::multi_index< "capsule"_n, capsule ,eosio::indexed_by<"byuser"_n, eosio::const_mem_fun<capsule, uint64_t, &capsule::get_secondary_1>>> capsules;

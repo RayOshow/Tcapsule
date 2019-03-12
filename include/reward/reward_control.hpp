@@ -77,7 +77,7 @@ public:
 					eosio_assert( row.reward_policy[index].total_token_amount.amount > quantity.amount, ERROR_MSG_INVALID_REWARD_AMOUNT);
 					eosio_assert( row.reward_policy[index].total_token_amount.symbol.code() == quantity.symbol.code(), ERROR_MSG_INVALID_REWARD_TOKEN);					
 					eosio_assert( status < REWARD_TYPE_MAX, ERROR_MSG_INVALID_REWARD_TYPE);
-
+ 
 					row.reward_policy[index].reward_amount = quantity.amount;	// per one 
 					row.reward_policy[index].status = status;
 					row.reward_policy[index].limit_count = limit_count;
