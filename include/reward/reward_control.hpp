@@ -63,7 +63,7 @@ public:
 		require_auth( self );
 		
 		rewards rws(self, self.value);
-		auto it = rws.find(reward_seq);
+		auto it = rws.find(reward_type);
 		eosio_assert( it != rws.end(),ERROR_MSG_REWARD_NOT_EXIST);
 
 		rws.modify(it, self, [&]( auto& row ) {	
