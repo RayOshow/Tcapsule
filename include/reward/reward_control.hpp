@@ -58,13 +58,15 @@ public:
 	
 	/**
 	**/
-	void set_reward_policy(uint32_t reward_type, uint32_t reward_seq, asset quantity, uint8_t status, uint32_t limit_count, uint32_t limit_time) {
+	void set_reward_policy(uint32_t reward_type, uint32_t reward_seq, string reward_name, asset quantity, uint8_t status, uint32_t limit_count, uint32_t limit_time) {
 	
 		require_auth( self );
 		
 		rewards rws(self, self.value);
 		auto it = rws.find(reward_type);
 		eosio_assert( it != rws.end(),ERROR_MSG_REWARD_NOT_EXIST);
+		eosio_assert( reward_name.length() <= REWARD_MAX_NAME_LEN, ERROR_MSG_MAX_REWARD_NAME);
+		
 
 		rws.modify(it, self, [&]( auto& row ) {	
 
@@ -78,6 +80,7 @@ public:
 					eosio_assert( row.reward_policy[index].total_token_amount.symbol.code() == quantity.symbol.code(), ERROR_MSG_INVALID_REWARD_TOKEN);					
 					eosio_assert( status < REWARD_TYPE_MAX, ERROR_MSG_INVALID_REWARD_TYPE);
  
+ 					row.reward_policy[index].reward_name = reward_name;	
 					row.reward_policy[index].reward_amount = quantity.amount;	// per one 
 					row.reward_policy[index].status = status;
 					row.reward_policy[index].limit_count = limit_count;

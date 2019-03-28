@@ -42,7 +42,7 @@ using eosio::const_mem_fun;
 
 /**
  @class time_capsule
- @date 2019/02/19
+ @last update date 2019/03/28
  @Author Ray-OShow(raymond@todos.co.kr)
  @brief  
 **/
@@ -102,8 +102,8 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 				return;
 			}
 
-            // put-322
-            // [command]-[user seq]
+      // put-322
+      // [command]-[user seq]
 			if(command == COMMAND_NAME_PUT_TOKEN) {
 				account_controller.charge_token(stoull(data, 0, 10), quantity);		
 			}	
@@ -118,6 +118,7 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 			}
 		}
 
+  
 		/**
 			When user want to refund.
 		**/
@@ -196,8 +197,8 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 			Set reward policy
 		**/
 		[[eosio::action]]
-		void setrwdp(uint32_t reward_type, uint32_t reward_seq, asset quantity, uint8_t status, uint32_t limit_count, uint32_t limit_time) {
-			reward_controller.set_reward_policy(reward_type, reward_seq, quantity, status , limit_count, limit_time);
+		void setrwdp(uint32_t reward_type, uint32_t reward_seq, string reward_name, asset quantity, uint8_t status, uint32_t limit_count, uint32_t limit_time) {
+			reward_controller.set_reward_policy(reward_type, reward_seq, reward_name, quantity, status , limit_count, limit_time);
 		}		
 
 		/**
@@ -219,9 +220,19 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 			It is essential to have "eosio.code" permission.
 		**/
 		void send_token(name user1, name user2, asset quantity, string memo) {
+		  
+		  name token_contract;
+		  
+		  if(quantity.symbol.code().to_string() == "EOS") {
+		    token_contract = EOSIO_TOKEN_CONTRACT;
+		  }
+		  else {
+		    token_contract = CUSTOM_TOKEN_CONTRACT;
+		  }
+		  
 			action(
 				permission_level{_self, "active"_n},
-				TOKEN_CONTRACT, 
+				token_contract, 
 				"transfer"_n,
 				std::make_tuple(
 					user1, 
@@ -237,6 +248,9 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 extern "C" { \
    void apply( uint64_t receiver, uint64_t code, uint64_t action ) { \
 	if(code == "todoskrtoken"_n.value && action == "transfer"_n.value) {\
+            eosio::execute_action(name(receiver), name(code), &time_capsule::transfer);\
+        }\
+  else if(code == "eosio.token"_n.value && action == "transfer"_n.value) {\
             eosio::execute_action(name(receiver), name(code), &time_capsule::transfer);\
         }\
 	else {\

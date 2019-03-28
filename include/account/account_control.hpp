@@ -25,12 +25,12 @@ public:
 		accounts acnts(self, self.value);
 		auto it = acnts.find( user_seq );
 		eosio_assert( it == acnts.end(), ERROR_MSG_ID_ALREADY_EXIST);
-
 		
-
 		acnts.emplace( self, [&]( auto& row ){
 			row.user_seq = user_seq;
-			row.tokens.push_back(reward);
+			if(reward.amount > 0 ) {
+				row.tokens.push_back(reward);
+			}
 		});
 	}
 	

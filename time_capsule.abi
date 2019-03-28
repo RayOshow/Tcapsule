@@ -1,5 +1,5 @@
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Tue Mar 12 02:09:11 2019",
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Wed Mar 27 22:02:10 2019",
     "version": "eosio::abi/1.1",
     "structs": [
         {
@@ -185,6 +185,10 @@
                     "type": "uint32"
                 },
                 {
+                    "name": "reward_name",
+                    "type": "string"
+                },
+                {
                     "name": "status",
                     "type": "uint8"
                 },
@@ -239,6 +243,10 @@
                 {
                     "name": "reward_seq",
                     "type": "uint32"
+                },
+                {
+                    "name": "reward_name",
+                    "type": "string"
                 },
                 {
                     "name": "quantity",

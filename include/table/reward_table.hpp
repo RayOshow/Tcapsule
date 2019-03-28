@@ -2,7 +2,7 @@
 
 struct rwpolicy {
 	uint32_t reward_seq; // reward number
-
+  string reward_name;
 	// Status	
 	uint8_t status;
 

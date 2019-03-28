@@ -2,7 +2,8 @@
 
 #define TEST_MODE_ON 1
 
-#define TOKEN_CONTRACT "todoskrtoken"_n
+#define CUSTOM_TOKEN_CONTRACT "todoskrtoken"_n
+#define EOSIO_TOKEN_CONTRACT "eosio.token"_n
 
 #define CONTRACT_NAME "time_capsule"
 
