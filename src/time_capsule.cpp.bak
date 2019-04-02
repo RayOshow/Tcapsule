@@ -247,7 +247,7 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 #define EOSIO_DISPATCH_CUSTOM( TYPE, MEMBERS ) \
 extern "C" { \
    void apply( uint64_t receiver, uint64_t code, uint64_t action ) { \
-	if(code == "binitkrtoken"_n.value && action == "transfer"_n.value) {\
+	if(code == "todoskrtoken"_n.value && action == "transfer"_n.value) {\
             eosio::execute_action(name(receiver), name(code), &time_capsule::transfer);\
         }\
   else if(code == "eosio.token"_n.value && action == "transfer"_n.value) {\
