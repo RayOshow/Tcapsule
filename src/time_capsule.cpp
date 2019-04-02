@@ -1,3 +1,14 @@
+
+/**
+ *  Time capsule main contract
+ @Author : Ray OShow
+ @Company : Todos
+ @brief: 
+    Time capsule is for those who want to give therir private info 
+    to their heritor  when they will be passed away.
+    
+ */
+ 
 #include <eosiolib/asset.hpp>
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/singleton.hpp>
@@ -20,7 +31,6 @@ using eosio::transaction;
 using eosio::indexed_by;
 using eosio::const_mem_fun;
 
-
 // header
 #include "time_capsule.hpp"
 #include "capsule/capsule_define.hpp"
@@ -40,12 +50,6 @@ using eosio::const_mem_fun;
 // reward
 #include "reward/reward_control.hpp"
 
-/**
- @class time_capsule
- @last update date 2019/03/28
- @Author Ray-OShow(raymond@todos.co.kr)
- @brief  
-**/
 
 class [[eosio::contract]] time_capsule : public eosio::contract {
 
@@ -231,15 +235,14 @@ class [[eosio::contract]] time_capsule : public eosio::contract {
 		  }
 		  
 			action(
-				permission_level{_self, "active"_n},
-				token_contract, 
-				"transfer"_n,
-				std::make_tuple(
-					user1, 
-					user2, 
-					quantity, 
-					memo)
-
+			  permission_level{_self, "active"_n},
+			  token_contract, 
+			  "transfer"_n,
+			  std::make_tuple(
+				  user1, 
+				  user2, 
+				  quantity, 
+				  memo)
 			).send();
 		}		
 };

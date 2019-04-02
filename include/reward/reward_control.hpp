@@ -121,11 +121,6 @@ public:
 
 		// if there is no reward type policy , reward will be zero.
 		if(it == rws.end()) {
-			print(" 1 ");
-			//reward_token.symbol = eosio::symbol_code("DUMMY");
-			//reward_token.symbol.symbol_code("DUMMY");
-			
-			//reward_token = "0.0000 DUMMY"_;
 			return reward_token;
 		}		
 
